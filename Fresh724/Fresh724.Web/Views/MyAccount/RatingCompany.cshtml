@@ -1,0 +1,169 @@
+@using Fresh724.Entity.Entities
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Fresh724.Entity.Entities.Company
+@{
+	ViewData["Title"] = "RatingCompany";
+}
+<link href="~/v2.3.2/jquery.rateyo.css" rel="stylesheet"/>
+<script src="~/v2.3.2/jquery.rateyo.js"></script>
+<script src="~/v2.3.2/jquery.min.js"></script>
+ <form method="post">
+	 <input type="hidden" name="Id" value="@Model.Id"><br/>
+	 <div class="container">
+		 <div class="row">
+			 <div class="col-md-12">
+				 <div class="form-group">
+					 <div class="col-md-6">
+						
+							 
+							 <label><h2>@Model.Name  </h2><img src="@Model.IconUrl"width="100%" style="border-radius:5px; border:1px solid #bbb9b9" /></label><br/>
+							 
+							 <br/><br/>
+							 <label><h5>UserName: @ViewBag.UserFullName</h5></label>
+							 <br/><br/>
+							 <br/><br/>
+						     <label><h5>Rate Company</h5></label>	
+							 <input type="hidden" name="OrderId" id="order" value="@ViewBag.OrderId"/>
+							 <br/><br/>
+							 <label><h5>Comment</h5></label>
+							 <br/>
+							 <textarea name="Comment" class="form-control"></textarea>
+							 <br/><br/>
+							 <label><h5>Enter Rating</h5></label>	
+							  <br/><br/>
+							 <div id="EnterRating">
+							 </div>
+							 <input type="hidden" name="RatingCompany" id="rating"/>
+							 <br/><br/>
+							 <button type="submit" class="btn btn-warning" style="width:150px">Save</button>
+						 
+					 </div><br/><br/>
+					 <div class="col-med-4">
+						 <h5> Total Comments: @ViewBag.number</h5> <br/><br/>
+
+						 <script>
+                            /* Javascript */
+                             
+                            $(function () {
+                             
+                              $("#poengs").rateYo({
+                             
+                                rating    : @ViewBag.Avg,
+                                readonly : true,
+                                multiColor: {
+                             
+                                  "startColor": "#FF0000", //RED
+                                  "endColor"  : "#00FF00"  //GREEN
+                                },
+                              
+                              });
+                             
+                            });
+                            </script>
+					 </div>
+					  <h5>Total Rating</h5> <br/>
+					 <div class="col-md-6" id="poengs"></div><br/><br/>
+
+				 </div>
+
+
+			 </div>
+		 </div>
+	 </div>
+</form>
+	 <div class="container">
+		 <div class="row" style="background-color: lightgrey">
+			  <h5>Users Ratings</h5><br/>
+			 <div class="col-md-12">
+				 @{ int i = 1; }
+				 @foreach (var item in ViewBag.comment)
+				 {
+					 <div class="col-md-6">
+						 <strong>@item.UserFullName</strong>
+
+						 <script>
+ 
+$(function () {
+ 
+  $('#@("ratings" + i)').rateYo({
+ 
+    rating    : @item.Rating,
+    readonly : true,
+    multiColor: {
+ 
+      "startColor": "#FF0000", //RED
+      "endColor"  : "#00FF00"  //GREEN
+    },
+  });
+ 
+});
+</script>
+
+					 </div>
+					 <div class="col-md-6" id="@("ratings" + i)"></div>
+					 i++;
+				 }
+			 </div>
+		 </div>
+	 </div>
+	 <script>
+/* Javascript */
+ 
+$(function () {
+ 
+  $("#EnterRating").rateYo({
+ 
+    rating    : 0,
+    numStars  : 5,
+    maxValue  : 5,
+    fullStar  : true,
+    multiColor: {
+ 
+      "startColor": "#FF0000", //RED
+      "endColor"  : "#00FF00"  //GREEN
+    },
+    onChange: function (rating, rateYoInstance) {
+ 
+      $("#rating").val(rating);
+    }
+  });
+ 
+});
+</script>
+
+
+<div class="container">
+	<div class="row" style="background-color: lightgrey">
+		<h5>Users Ratings</h5><br/>
+		<div class="col-md-12">
+			@{ int j = 1; }
+			@foreach (var item in ViewBag.comment)
+			{
+				<div class="col-md-6">
+					<strong>@item.UserFullName</strong>
+
+					<script>
+ 
+$(function () {
+ 
+  $('#@("ratings" + j)').rateYo({
+ 
+    rating    : @item.Rating,
+    readonly : true,
+    multiColor: {
+ 
+      "startColor": "#FF0000", //RED
+      "endColor"  : "#00FF00"  //GREEN
+    },
+  });
+ 
+});
+</script>
+
+				</div>
+				<div class="col-md-6" id="@("ratings" +j)"></div>
+				j++;
+			}
+		</div>
+	</div>
+</div>

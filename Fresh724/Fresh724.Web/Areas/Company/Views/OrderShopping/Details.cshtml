@@ -1,0 +1,202 @@
+﻿@using Fresh724.Entity.Entities
+@using Fresh724.Service
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Fresh724.Entity.Entities.OrderShoppingList
+@{
+	ViewData["Title"] = "Details";
+}
+
+<form method="post" asp-action="Details" enctype="multipart/form-data">
+	<input asp-for="OrderShopping.Id" hidden />
+		<br/>
+		<div class="container">
+			<div class="card">
+				<div class="card-header bg-dark text-light ml-0">
+					<div class="container row">
+						<div class="col-12 d-none d-md-block col-md-6 pb-1">
+							<i class="fas fa-shopping-cart"></i> &nbsp; Order Summary
+						</div>
+						<div class="col-12 col-md-4 offset-md-2 text-right">
+							<a asp-action="Index" class="btn btn-outline-info form-control btn-sm">Back to Orders</a>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="container rounded p-2">
+						<div class="row">
+							<div class="col-12 col-lg-6 pb-4">
+								<div class="row">
+									<h4 class="d-flex justify-content-between align-items-center mb-3">
+										<span class="text-primary">PickUp Details:</span>
+									</h4>
+								</div>
+								<div class="row my-1">
+									<div class="col-3">FirstName</div>
+									<div class="col-9">
+										<input asp-for="OrderShopping.FirstName" class="form-control"/>
+										<span asp-validation-for="OrderShopping.FirstName" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="row my-1">
+									<div class="col-3">LastName</div>
+									<div class="col-9">
+										<input asp-for="OrderShopping.LastName" class="form-control"/>
+										<span asp-validation-for="OrderShopping.LastName" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="row my-1">
+									<div class="col-3">Phone</div>
+									<div class="col-9">
+										<input asp-for="OrderShopping.PhoneNumber" type="text" class="form-control"/>
+										<span asp-validation-for="OrderShopping.PhoneNumber" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="row my-1">
+									<div class="col-3">Email</div>
+									<div class="col-9">
+										<input asp-for="OrderShopping.Email" type="text" class="form-control"/>
+										<span asp-validation-for="OrderShopping.Email" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="row my-1">
+									<div class="col-3">Address Street_1</div>
+									<div class="col-9">
+
+										<input asp-for="OrderShopping.Street1" type="text" class="form-control"/>
+										<span asp-validation-for="OrderShopping.Street1" class="text-danger"></span>
+
+									</div>
+								</div>
+								<div class="row my-1">
+									<div class="col-3">Address Street_2</div>
+									<div class="col-9">
+
+										<input asp-for="OrderShopping.Street2" type="text" class="form-control"/>
+										<span asp-validation-for="OrderShopping.Street2" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="row my-1">
+									<div class="col-3">City</div>
+									<div class="col-9">
+
+										<input asp-for="OrderShopping.City" type="text" class="form-control"/>
+										<span asp-validation-for="OrderShopping.City" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="row my-1">
+									<div class="col-3">State</div>
+									<div class="col-9">
+
+										<input asp-for="OrderShopping.State" type="text" class="form-control"/>
+										<span asp-validation-for="OrderShopping.State" class="text-danger"></span>
+
+									</div>
+								</div>
+								<div class="row my-1">
+									<div class="col-3">Zip Code</div>
+									<div class="col-9">
+										<input asp-for="OrderShopping.ZipCode" type="text" class="form-control"/>
+										<span asp-validation-for="OrderShopping.ZipCode" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="row my-1">
+									<div class="col-3">Email</div>
+									<div class="col-9">
+										<input asp-for="OrderShopping.ZipCode" type="text" class="form-control"/>
+										<span asp-validation-for="OrderShopping.ZipCode" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="row my-1">
+									<div class="col-3">Payment Status</div>
+									<div class="col-9">
+										<input asp-for="OrderShopping.PaymentStatus" type="text" readonly class="form-control"/>
+										<span asp-validation-for="OrderShopping.PaymentStatus" class="text-danger"></span>
+									</div>
+								</div>
+								@if (Model.OrderShopping.PaymentStatus != StatusService.Refunded)
+								{
+									<div class="row my-1">
+										<div class="col-3">Order Status</div>
+										<div class="col-9">
+											@Html.DropDownListFor(m => m.OrderShopping.OrderStatus, 
+												new SelectList(Enum.GetValues(typeof(OrderShopping.Status))), 
+												"Select Status")
+										</div>
+									</div>
+								}
+								@if (Model.OrderShopping.PaymentStatus == StatusService.Refunded)
+                                								{
+									                                <div class="row my-1">
+                                										<div class="col-3">Order Status</div>
+                                										<div class="col-9">
+                                											<input asp-for="OrderShopping.OrderStatus" type="text" readonly class="form-control"/>
+	                                                                        <span asp-validation-for="OrderShopping.OrderStatus" class="text-danger"></span>
+                                										</div>
+                                									</div>
+									                                
+								                                }
+								
+								<input type="submit" asp-action="UpdateOrder" class="btn btn-warning form-control my-1" value="Update Order"/>
+
+							</div>
+							<div class="col-12 col-lg-5 offset-lg-1">
+								<h4 class="d-flex justify-content-between align-items-center mb-3">
+									<span class="text-primary">Order Summary</span>
+								</h4>
+								<ul class="list-group mb-3">
+									@foreach (var detail in Model.OrderShoppingDetails)
+									{
+										<li class="list-group-item d-flex justify-content-between p-2">
+											<div class="row container">
+												<div class="col-8">
+
+													<h6 class="my-0 text-primary">@detail.Product.Title</h6>
+													<small class="text-muted">Price : @detail.Price.ToString("c")</small><br/>
+													<small class="text-muted">Quantity : @detail.Quantity</small>
+												</div>
+												<div class="col-4 text-end">
+													<p class="text-success">@((detail.Quantity * detail.Price).ToString("c"))</p>
+												</div>
+											</div>
+										</li>
+
+										<li class="list-group-item bg-info">
+											<div class="row container">
+												<div class="col-6">
+													<h5 class="text-white">TOTAL PRICE </h5>
+												</div>
+												<div class="col-6 text-end">
+													<h5 class="text-white">@((detail.Quantity * detail.Price).ToString("c"))</h5>*
+												</div>
+											</div>
+										</li>
+									}
+								</ul>
+                          
+								@if (User.IsInRole(RoleService.Role_User_Comp) || User.IsInRole(RoleService.Role_User_Empl))
+								{
+									if (Model.OrderShopping.PaymentStatus == PaymentService.PaymentStatusApproved)
+									{
+										<input type="submit" asp-action="StartProcessing" class="btn btn-primary form-control my-1" value="Start Processing"/>
+									}
+									if (Model.OrderShopping.OrderStatus == StatusService.InProcess)
+									{
+										<input type="submit" asp-action="StartPickUp" class="btn btn-success form-control my-1" value="ReadyForPickUp"/>
+									}
+									
+								
+									@if (Model.OrderShopping.PaymentStatus != StatusService.Refunded&&
+									     Model.OrderShopping.OrderStatus != StatusService.Cancelled&&
+									     Model.OrderShopping.OrderStatus != StatusService.Completed)
+									{
+										<input type="submit" asp-action="CancelOrder" class="btn btn-danger form-control my-1" value="Cancel Order"/>
+									}
+								}
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>

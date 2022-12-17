@@ -1,0 +1,80 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using X.PagedList
+@using X.PagedList.Mvc.Bootstrap4.Core
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@using static Fresh724.Entity.Entities.CompanyApply
+@model IPagedList<Fresh724.Entity.Entities.CompanyApply>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Contact";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+            <div class="table-responsive">
+                <div class="table-wrapper">			
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-xs-4">
+        						<div class="show-entries">
+                                </div>						
+        					</div>
+        					<div class="col-xs-4">
+        						<h2 class="text-center">CompanyApplies <b>Details</b></h2>
+        					</div>
+                            <div class="col-xs-4">
+                                <div class="search-box">
+        							<div class="input-group">
+	                                    <input type="text" class="form-control" placeholder="Search&hellip;"name="SearchString" value="@ViewData["CurrentFilter"]"/>
+                                        <input class="btn btn-primary btn-group-sm" value="Search" type="submit"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<table class="table table-bordered table-dark table-hover ">
+    <thead >
+    <tr >
+        <th>ID</th>
+        <th>@Html.ActionLink("CompanyName", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+        <th>CompanyPhone</th>
+        <th>@Html.ActionLink("CompanyEmail", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+        <th>CompanyState</th>
+        <th>ApplicationStatus</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    
+    @foreach (var company in Model) {
+    <tbody >
+    <tr class="table table-secondary">
+        <td>@Html.DisplayFor(modelItem => company.Id)</td>
+        <td>@Html.DisplayFor(modelItem => company.CompanyName)</td>
+        <td>@Html.DisplayFor(modelItem => company.CompanyPhone)</td>
+        <td>@Html.DisplayFor(modelItem => company.CompanyEmail)</td>
+        <td>@Html.DisplayFor(modelItem => company.CompanyState)</td>
+        <td>@Html.DisplayFor(modelItem => company.ApplicationStatus)</td>
+        <td><a asp-action="Edit" asp-route-id="@company.Id" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a> </td>
+        <td><a asp-action="Delete" asp-route-id="@company.Id" onclick="return confirm('Are you sure want to delete this record : @company.CompanyName ?')" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+    </tr>
+    </tbody>
+}
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }), Bootstrap4PagedListRenderOptions.Classic)
+ </div>
+    </div>
+   </div>
+}
+
+

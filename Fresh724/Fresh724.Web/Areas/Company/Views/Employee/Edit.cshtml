@@ -1,0 +1,110 @@
+﻿@using Fresh724.Entity.Entities
+@model Fresh724.Entity.Entities.Employee
+@{
+    ViewData["Title"] = "Edit";
+}
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+	<input asp-for="Id" hidden />
+		<br/>
+		<div class="container">
+			<div class="card">
+				<div class="card-header bg-dark text-light ml-0">
+					<div class="container row">
+						<div class="col-12 d-none d-md-block col-md-6 pb-1">
+							<i class="material-icons">&#xE254;</i> &nbsp; Edit Employee
+						</div>
+						<div class="col-12 col-md-4 offset-md-2 text-right">
+							<a asp-action="Index" class="btn btn-outline-info form-control btn-sm">Back to Employee List</a>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="container rounded p-2">
+						<div class="row">
+							<div class="col-12 col-lg-6 pb-4">
+								<div class="row">
+									<h4 class="d-flex justify-content-between align-items-center mb-3">
+										<span class="text-primary">Employee Details:</span>
+									</h4>
+								</div>
+								<div class="mb-3">
+									<div class="col-4">FirstName</div>
+									<div class="col-10">
+										<input asp-for="FirstName" class="form-control"/>
+										<span asp-validation-for="FirstName" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="mb-3">
+									<div class="col-4">LastName</div>
+									<div class="col-10">
+										<input asp-for="LastName" class="form-control"/>
+										<span asp-validation-for="LastName" class="text-danger"></span>
+									</div>
+								</div>
+									<div class="mb-3">
+										<div class="col-4">Email</div>
+										<div class="col-10">
+											<input asp-for="Email" class="form-control"/>
+											<span asp-validation-for="Email" class="text-danger"></span>
+											</div>
+										</div>
+								<div class="mb-3">
+									<div class="col-4">ModifiedDateTime</div>
+									<div class="col-10">
+										<input asp-for="ModifiedDateTime" type="text" class="form-control"/>
+										<span asp-validation-for="ModifiedDateTime" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="mb-3">
+									<div class="col-4">ModifiedBy</div>
+									<div class="col-10">
+										<input asp-for="ModifiedBy" type="text" class="form-control"/>
+										<span asp-validation-for="ModifiedBy" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="mb-3">
+									<div class="col-4">CompanyId</div>
+									<div class="col-10">
+										<input asp-for="CompanyId" class="form-control"/>
+										<span asp-validation-for="CompanyId" class="text-danger"></span>
+									</div>
+								</div>
+								
+								<div class="mb-3">
+									<div class="col-4">ImageUrl</div>
+									<div class="col-10">
+										<input asp-for="ImageUrl" type="text" class="form-control"/>
+										<span asp-validation-for="ImageUrl" class="text-danger"></span>
+										</div>
+									</div>
+								<div class="mb-3">
+									<div class="col-4">UploadImageUrl</div>
+									<div class="col-9">
+										<input type="file" id="uploadBox" name="file" class="form-control"/>
+										</div>
+									</div>
+								<div class="mb-3">
+										<div class="col-3">Employee Status</div>
+										<div class="col-9">
+											@Html.DropDownListFor(m => m.Status, 
+												new SelectList(Enum.GetValues(typeof(Category.Status2))), 
+												"Select Status")
+										</div>
+									</div>
+								
+								<input type="submit" asp-action="Edit" class="btn btn-warning form-control my-1" value="Update Employee"/>
+
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+ 
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

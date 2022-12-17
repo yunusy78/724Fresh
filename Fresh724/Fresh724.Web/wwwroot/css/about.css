@@ -1,0 +1,32 @@
+﻿#AboutUsSection{
+
+    display: grid;
+    place-items: center;
+    align-content: center;
+    min-height: 100vh;
+    font-size: 20px;
+}
+
+
+.hiddenFade{
+    opacity: 0;
+    transition: all 2s;
+
+}
+
+.hiddenTransition{
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: all 2s;
+}
+
+.showFade {
+    opacity: 1;
+}
+
+
+.showTransition {
+    transform: translateX(0%);
+    opacity: 1;
+}
+

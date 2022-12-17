@@ -1,0 +1,93 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using X.PagedList
+@using X.PagedList.Mvc.Bootstrap4.Core
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@using static Fresh724.Entity.Entities.Product
+@model IPagedList<Fresh724.Entity.Entities.Product>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Products";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="show-entries">
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <h2 class="text-center">Product <b>List</b></h2>
+                        </div>
+                        
+                        <div class="col-xs-4">
+                            <div class="search-box">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search&hellip;"name="SearchString" value="@ViewData["CurrentFilter"]"/>
+                                    <input class="btn btn-primary btn-group-sm" value="Search" type="submit"/>
+                                    <a><i ></i><span>&nbsp;&nbsp;&nbsp;</span></a>
+                                    <a asp-action="AddOrEdit" class="btn btn-primary" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-dark table-hover ">
+                    <thead>
+                    <tr>
+                        
+                        <th>Id</th>
+                        <th>@Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+                        <th>Description</th>
+                        <th>@Html.ActionLink("PurchasePrice", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+                        <th>Status</th>
+                        <th>@Html.ActionLink("CreatedDateTime", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+                        <th>CategoryName</th>
+                        <th>@Html.ActionLink("CompanyName", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+                        <th>Image</th>
+                        <th>Quantity</th>
+                        <th>Details</th>
+                        <th>Edit </th>
+                        <th>Delete</th>
+                    </tr>
+
+                    @foreach (var product in Model)
+                    {
+                        <tbody >
+                        <tr class="table table-secondary">
+                            <td>@Html.DisplayFor(modelItem => product.Id)</td>
+                            <td>@Html.DisplayFor(modelItem => product.Title)</td>
+                            <td>@Html.DisplayFor(modelItem => product.Description)</td>
+                            <td>@Html.DisplayFor(modelItem => product.PurchasePrice)</td>
+                            <td>@Html.DisplayFor(modelItem => product.Status)</td>
+                            <td>@Html.DisplayFor(modelItem => product.CreatedDateTime)</td>
+                            <td>@Html.DisplayFor(modelItem => product.CategoryName)</td>
+                            <td>@Html.DisplayFor(modelItem => product.CreatedBy)</td>
+                            <td><img src="@product.ImageUrl"width="100%" style="border-radius:5px; border:1px solid #bbb9b9"/></td>
+                             <td>@Html.DisplayFor(modelItem => product.Quantity)</td>
+                            <td><a asp-action="Details" asp-route-id="@product.Id" class="view" title="Details" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a></td>
+                            <td><a asp-action="AddOrEdit" asp-route-id="@product.Id" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a> </td>
+                            <td><a asp-action="Delete" asp-route-id="@product.Id" onclick="return confirm('Are you sure want to delete this user : @product.Title ?')" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                        </tr>
+                        </tbody>
+                    }
+                </table>
+                <br/>
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                               
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }), Bootstrap4PagedListRenderOptions.Classic)
+            </div>
+        </div>
+    </div>
+}
+ 

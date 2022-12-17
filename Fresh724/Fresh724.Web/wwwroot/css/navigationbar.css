@@ -1,0 +1,14 @@
+﻿.nav-link:hover{
+    
+    color: black !important;
+}
+
+.nav-link{
+    color: white !important;
+    margin-right: 20px;
+}
+
+
+
+.nav-item.dropdown:hover .dropdown-menu{
+    display: block;}

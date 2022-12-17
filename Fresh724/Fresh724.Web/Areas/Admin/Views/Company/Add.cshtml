@@ -1,0 +1,71 @@
+﻿@using Fresh724.Entity.Entities
+@model Fresh724.Entity.Entities.Company
+@{
+    ViewData["Title"] = "Add";
+}
+<form method="post" asp-action="Add" enctype="multipart/form-data">
+	<input asp-for="Id" hidden />
+		<br/>
+		<div class="container">
+			<div class="card">
+				<div class="card-header bg-dark text-light ml-0">
+					<div class="container row">
+						<div class="col-12 d-none d-md-block col-md-6 pb-1">
+							<i class="material-icons">&#xE147;</i> &nbsp; Add Company
+						</div>
+						<div class="col-12 col-md-4 offset-md-2 text-right">
+							<a asp-action="Index" class="btn btn-outline-info form-control btn-sm">Back to Company List</a>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="container rounded p-2">
+						<div class="row">
+							<div class="col-12 col-lg-6 pb-4">
+								<div class="row">
+									<h4 class="d-flex justify-content-between align-items-center mb-3">
+										<span class="text-primary">Company Details:</span>
+									</h4>
+								</div>
+								<div class="mb-3 col-6">
+									    <label asp-for="Name"></label>
+										<input asp-for="Name" class="form-control"/>
+										<span asp-validation-for="Name" class="text-danger"></span>
+									</div>
+								<div class="mb-3 col-6">
+									 <label asp-for="CreatedDateTime"></label>
+									 <input asp-for="CreatedDateTime" class="form-control" />
+									 <span asp-validation-for="CreatedDateTime" class="text-danger"></span>
+									 </div>
+								 <div class="mb-3 col-6">
+									 <label asp-for="CreatedBy"></label>
+									 <input asp-for="CreatedBy" class="form-control" />
+									 <span asp-validation-for="CreatedBy" class="text-danger"></span>
+									 </div>
+							
+								<div class="mb-3 col-6">
+									<label asp-for="IconUrl"></label>
+										<input type="file" id="uploadBox" name="file" class="form-control"/>
+										</div>
+								<div class="mb-3 col-6">
+									<label asp-for="Status"></label>
+											@Html.DropDownListFor(m => m.Status, 
+												new SelectList(Enum.GetValues(typeof(Category.Status2))), 
+												"Select Status")
+										</div>
+								<input type="submit" asp-action="Add" class="btn btn-primary form-control my-1" value="Add"/>
+
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+ 
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

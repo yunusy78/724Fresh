@@ -1,0 +1,84 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using X.PagedList
+@using X.PagedList.Mvc.Bootstrap4.Core
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@using static Fresh724.Entity.Entities.Product
+@model IPagedList<Fresh724.Entity.Entities.OrderShopping>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="show-entries">
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <h2 class="text-center">Order <b>Details</b></h2>
+                        </div>
+
+                        <div class="col-xs-4">
+                            <div class="search-box">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search&hellip;"name="SearchString" value="@ViewData["CurrentFilter"]"/>
+                                    <input class="btn btn-primary btn-group-sm" value="Search" type="submit"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-dark table-hover ">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>@Html.ActionLink("FirstName", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+                        <th>LastName</th>
+                        <th>@Html.ActionLink("Email", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+                        <th>PhoneNumber</th>
+                        <th>@Html.ActionLink("OrderDate", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+                        <th>Status</th>
+                        <th>TotalPrice</th>
+                         <th>Edit</th>
+                        <th>Details</th>
+                        <th>Delete</th>
+                    </tr>
+
+                    @foreach (var order in Model)
+                    {
+                        <tbody >
+                        <tr class="table table-secondary">
+                            <td>@Html.DisplayFor(modelItem => order.Id)</td>
+                            <td>@Html.DisplayFor(modelItem => order.FirstName)</td>
+                            <td>@Html.DisplayFor(modelItem => order.LastName)</td>
+                            <td>@Html.DisplayFor(modelItem => order.Email)</td>
+                            <td>@Html.DisplayFor(modelItem => order.PhoneNumber)</td>
+                            <td>@Html.DisplayFor(modelItem => order.OrderDate)</td>
+                            <td>@Html.DisplayFor(modelItem => order.PaymentStatus)</td>
+                            <td>@Html.DisplayFor(modelItem => order.TotalPrice)</td>
+                            <td><a asp-action="Details" asp-route-id="@order.Id" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a> </td>
+                            <td><a asp-action="Details" asp-route-id="@order.Id" class="view" title="Details" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a></td>
+                            <td><a asp-action="Delete" asp-route-id="@order.Id" onclick="return confirm('Are you sure want to delete this record : @order.UserId ?')" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                        </tr>
+                        </tbody>
+                    }
+                </table>
+                <br/>
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }), Bootstrap4PagedListRenderOptions.Classic)
+            </div>
+        </div>
+    </div>
+
+}

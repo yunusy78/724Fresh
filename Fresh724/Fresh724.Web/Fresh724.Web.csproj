@@ -1,0 +1,121 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>aspnet-assignment_4-D7CAF123-A543-4B07-9C28-16BCB140B89B</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AjaxControlToolkit" Version="20.1.0" />
+        <PackageReference Include="MailKit" Version="3.4.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="6.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+          <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
+        <PackageReference Include="MimeKit" Version="3.4.2" />
+        <PackageReference Include="Npgsql" Version="6.0.7" />
+        <PackageReference Include="PagedList.Mvc" Version="4.5.0" />
+        <PackageReference Include="SendGrid" Version="9.28.1" />
+        <PackageReference Include="Stripe.net" Version="40.15.0-beta.2" />
+        <PackageReference Include="SwashBuckle.AspNetCore.MicrosoftExtensions" Version="0.5.0" />
+        <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="20.3.0.50" />
+        <PackageReference Include="X.PagedList.Mvc" Version="8.0.7" />
+        <PackageReference Include="X.PagedList.Mvc.Bootstrap4" Version="8.1.0" />
+        <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Fresh724.Core\Fresh724.Core.csproj" />
+      <ProjectReference Include="..\Fresh724.Data\Fresh724.Data.csproj" />
+      <ProjectReference Include="..\Fresh724.Entity\Fresh724.Entity.csproj" />
+      <ProjectReference Include="..\Fresh724.Service\Fresh724.Service.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Transaction\AddOrEdit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Transaction\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Dashboard\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\Category\Add.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\Category\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\Category\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\Category\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\Category\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\Company\Add.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\Company\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\Company\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\Company\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\Company\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Product\AddOrEdit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Product\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Product\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Product\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Blog\Add.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Blog\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Blog\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\LICENSE.md" />
+      <_ContentIncludedByDefault Remove="wwwroot\__MACOSX\v2.3.2\._index.html" />
+      <_ContentIncludedByDefault Remove="wwwroot\__MACOSX\v2.3.2\._jquery.rateyo.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\__MACOSX\v2.3.2\._jquery.rateyo.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\__MACOSX\v2.3.2\._jquery.rateyo.less" />
+      <_ContentIncludedByDefault Remove="wwwroot\__MACOSX\v2.3.2\._jquery.rateyo.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\__MACOSX\v2.3.2\._jquery.rateyo.min.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\__MACOSX\v2.3.2\._jquery.rateyo.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\__MACOSX\v2.3.2\._jquery.rateyo.min.js.map" />
+      <_ContentIncludedByDefault Remove="Pages\YourAccount\Index.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Areas\Admin\Views\Category\Add.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Views\Category\Delete.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Views\Category\Details.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Views\Category\Edit.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Views\Category\Index.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Views\Company\Add.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Views\Company\Delete.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Views\Company\Details.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Views\Company\Edit.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Views\Company\Index.cshtml" />
+      <AdditionalFiles Include="Areas\Admin\Views\_ViewImports.cshtml" />
+      <AdditionalFiles Include="Areas\Company\Views\Employee\Add.cshtml" />
+      <AdditionalFiles Include="Areas\Company\Views\Employee\Delete.cshtml" />
+      <AdditionalFiles Include="Areas\Company\Views\Employee\Details.cshtml" />
+      <AdditionalFiles Include="Areas\Company\Views\Employee\Edit.cshtml" />
+      <AdditionalFiles Include="Areas\Company\Views\Product\AddOrEdit.cshtml" />
+      <AdditionalFiles Include="Areas\Company\Views\Product\Delete.cshtml" />
+      <AdditionalFiles Include="Areas\Company\Views\Product\Details.cshtml" />
+      <AdditionalFiles Include="Areas\Company\Views\Product\Index.cshtml" />
+      <AdditionalFiles Include="Areas\Company\Views\_ViewImports.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\dashboard" />
+      <Folder Include="wwwroot\images\category" />
+      <Folder Include="wwwroot\images\company" />
+      <Folder Include="wwwroot\images\employee" />
+      <Folder Include="wwwroot\images\product" />
+    </ItemGroup>
+
+</Project>

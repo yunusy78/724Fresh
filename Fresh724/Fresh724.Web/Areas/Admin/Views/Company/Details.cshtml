@@ -1,0 +1,93 @@
+﻿@model Fresh724.Entity.Entities.Company
+@{
+    ViewData["Title"] = "Details";
+}
+<link href="~/v2.3.2/jquery.rateyo.css" rel="stylesheet"/>
+<script src="~/v2.3.2/jquery.rateyo.js"></script>
+<script src="~/v2.3.2/jquery.min.js"></script>
+
+<div class="container py-5">
+    <div class="row text-center text-white mb-5">
+        <div class="col-lg-7 mx-auto">
+            <h1 class="display-4">Company Details</h1>
+        </div>
+    </div>
+    <div class="row">
+        <!-- List group-->
+        <ul class="list-group shadow">
+            <!-- list group item-->
+            <li class="list-group-item">
+                <!-- Custom content-->
+                <div class="col-2 pt-4"><img src="@Model.IconUrl"width="100%" style="border-radius:5px; border:1px solid #bbb9b9" /></div>
+                <p class="font-italic text-muted mb-0 small"><label asp-for="IconUrl"></label> : @Model.IconUrl</p>
+                <div class="media-body order-2 order-lg-1">
+                    <h6 class="mt-0 font-weight-bold mb-2"><label asp-for="Id"></label> : @Model.Id</h6>
+                    <h6 class="mt-0 font-weight-bold mb-2"><label asp-for="Name"></label> : @Model.Name</h6>
+                    <h6 class="mt-0 font-weight-bold mb-2"><label asp-for="CreatedBy"></label> : @Model.CreatedBy</h6>
+                    <h8 class="font-weight-bold my-2"><label asp-for="CreatedDateTime"></label> : @Model.CreatedDateTime</h8>
+                    <h4 class="mt-0 font-weight-bold mb-2"><label asp-for="TotalRating"></label> : <p class="col-md-6" id="rating"></p></h4>
+                    <script>
+                                                                                     
+                                                                       /* Javascript */
+                                                                        
+                                                                       $(function () {
+                                                                        
+                                                                         $("#rating").rateYo({
+                                                                        
+                                                                           rating    : @Model.TotalRating,
+                                                                           readonly : true,
+                                                                           multiColor: {
+                                                                        
+                                                                             "startColor": "#FF0000", //RED
+                                                                             "endColor"  : "#00FF00"  //GREEN
+                                                                           },
+                                                                         
+                                                                         });
+                                                                        
+                                                                       });
+                                                                       </script>
+                                     
+                </div>
+                <div class="d-flex align-items-center justify-content-between mt-1">
+                </div><!-- End -->
+            </li> <!-- End -->
+
+        </ul> <!-- End -->
+    </div>
+</div>
+
+<div class="container">
+    <div class="row" style="background-color: lightgrey">
+        <h5>Users Ratings</h5><br/>
+        <div class="col-md-12">
+            @{ int i = 1; }
+            @foreach (var item in ViewBag.comment)
+            {
+                <div class="col-md-6">
+                    <strong>@item.UserFullName</strong>
+                    <p class="col-md-6" id="rating@i"></p>
+                    <script>
+ 
+$(function () {
+ 
+  $('#@("ratings" + i)').rateYo({
+ 
+    rating    : @item.Rating,
+    readonly : true,
+    multiColor: {
+ 
+      "startColor": "#FF0000", //RED
+      "endColor"  : "#00FF00"  //GREEN
+    },
+  });
+ 
+});
+</script>
+
+                </div>
+                <div class="col-md-6" id="@("ratings" + i)"></div>
+                i++;
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿/*Resources*/
+/*https://stackoverflow.com/questions/41429564/cant-set-footer-at-the-bottom-of-the-page/ */
+/* https://stackoverflow.com/questions/643879/css-to-make-html-page-footer-stay-at-bottom-of-the-page-with-a-minimum-height-b*/
+
+body{
+    min-height: 100vh;
+    margin:0;
+}
+
+footer{
+
+    height:80px;
+    background-color: rgb(13, 202, 240);
+    text-align: center; }
+
+
+body{
+    display:flex;
+    flex-direction:column;
+}
+
+
+body {
+    display: table;
+    width: 100%;
+}
+
+body > footer {
+    display: table-row;
+}
+
+.footer .container {
+    text-align: center;
+    display: inline-block;
+
+
+}
+
+
+.footer .container a {
+    padding-left: 4%;
+    padding-right: 4%;
+    color: white;
+
+}
+
+.footer .container :hover {
+
+    color: black;
+
+}
+
+#Footer{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

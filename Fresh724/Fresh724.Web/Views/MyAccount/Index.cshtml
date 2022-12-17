@@ -1,0 +1,185 @@
+@using Fresh724.Entity.Entities
+@{
+    ViewBag.Title = "MyAccount";
+}
+
+<form method="post" asp-action="Index" enctype="multipart/form-data">
+	<br/>
+		<div class="container">
+			<div class="card">
+				<div class="card-header bg-dark text-light ml-0">
+					<div class="container row">
+						<div class="col-12 d-none d-md-block col-md-6 pb-1">
+							<h4 class="d-flex justify-content-between align-items-center mb-3">
+								<span class="text-primary">MyAccount</span>
+							</h4>
+						</div>
+						<div class="col-12 col-md-4 offset-md-2 text-right">
+							<a asp-action="Index" asp-controller="Home" class="btn btn-outline-info form-control btn-sm">Back to Home</a>
+						</div>
+					</div>
+				</div>
+				 <h5 class="d-flex justify-content-between align-items-center mb-3">
+                									 <span class="text-primary">MyProfile</span>
+                								 </h5>
+				<div class="card-body">
+					<div class="container rounded p-2">
+						<div class="row">
+							<div class="col-12 col-lg-6 pb-4">
+								<div class="row">
+								</div>
+								 @foreach (ApplicationUser user in ViewBag.information)
+                                                         {
+	                                                         if(@user.FirstName==null || @user.LastName==null || @user.Email==null || @user.PhoneNumber==null)
+	                                                         {
+		                                                         <div class="col-12">
+			                                                         <div class="alert alert-danger" role="alert">
+				                                                         <h4 class="alert-heading">Warning!</h4>
+				                                                         <p>It seems like you have not completed your profile. Please complete your profile to continue.</p>
+				                                                         <hr>
+				                                                         <a asp-action="Edit"  asp-controller="MyAccount" asp-route-id="@user.Id" type="submit" class="btn btn-primary" data-toggle="tooltip">Update Profil</a>
+			                                                         </div>
+			                                                         </div>
+				                                                         }
+                                	                         <div class="row my-1">
+                                		                         <div class="col-3">FirstName</div>
+                                		                         <div class="col-9">
+                                			                         <input asp-for="@user.FirstName" type="text" class="form-control"/>
+                                			                         <span asp-validation-for="@user.FirstName" class="text-danger"></span>  
+                                			                         
+                                		                         </div>
+                                	                         </div>
+                                	                         <div class="row my-1">
+                                		                         <div class="col-3">LastName</div>
+                                		                         <div class="col-9">
+                                			                          <input asp-for="@user.LastName" type="text" class="form-control"/>
+                                			                          <span asp-validation-for="@user.LastName" class="text-danger"></span>  
+                                			                         
+                                		                         </div>
+                                	                         </div>
+                                	                         <div class="row my-1">
+                                		                         <div class="col-3">Phone</div>
+                                		                         <div class="col-9">
+                                			                          <input asp-for="@user.PhoneNumber" type="text" class="form-control"/>
+                                			                          <span asp-validation-for="@user.PhoneNumber" class="text-danger"></span>  
+                                			                         
+                                		                         </div>
+                                	                         </div>
+	                                                         <div class="row my-1">
+		                                                         <div class="col-3">Email</div>
+		                                                         <div class="col-9">
+			                                                         <input asp-for="@user.Email" type="text" class="form-control"/>
+			                                                         <span asp-validation-for="@user.Email" class="text-danger"></span>  
+                                			                         
+		                                                         </div>
+	                                                         </div>
+	                                                         <a asp-action="Edit"  asp-controller="MyAccount" asp-route-id="@user.Id" type="submit" class="btn btn-primary" data-toggle="tooltip">Update Profil</a>
+                                                         }
+								 <h5 class="d-flex justify-content-between align-items-center mb-3">
+									 <span class="text-primary">MyAddress</span>
+								 </h5>
+								 <div class="col-12">
+									 @foreach (AddressUser address in ViewBag.address)
+									 {
+										 if (@address.Id == null)
+										 {
+											 <div class="alert alert-danger" role="alert">
+												 <h4 class="alert-heading">Warning!</h4>
+												 <p>It seems like you have not completed your address. Please complete your address to continue.</p>
+												 <hr>
+												 <a asp-action="Add" asp-controller="AddressUser" type="submit" class="btn btn-primary" data-toggle="tooltip">Add Address</a>
+											 </div>
+										 }
+
+									 }
+									 								 </div>
+
+									 @foreach (AddressUser address in ViewBag.address)
+							{
+	                                <div class="row my-1">
+		                                <div class="col-3">Address Street_1</div>
+		                                <div class="col-9">
+			                              <input asp-for="@address.Street1" type="text" class="form-control"/>
+			                              <span asp-validation-for="@address.Street1" class="text-danger"></span>
+		                                </div>
+	                                </div>
+	                                <div class="row my-1">
+		                                <div class="col-3">Address Street_2</div>
+		                                <div class="col-9">
+
+			                               <input asp-for="@address.Street2" type="text" class="form-control"/>
+			                               <span asp-validation-for="@address.Street2" class="text-danger"></span>  
+			                                
+		                                </div>
+	                                </div>
+	                                <div class="row my-1">
+		                                <div class="col-3">City</div>
+		                                <div class="col-9">
+                                          <input asp-for="@address.City" type="text" class="form-control"/>
+			                              <span asp-validation-for="@address.City" class="text-danger"></span>  
+			                               
+			                                
+		                                </div>
+	                                </div>
+	                                <div class="row my-1">
+		                                <div class="col-3">State</div>
+		                                <div class="col-9">
+
+			                               <input asp-for="@address.State" type="text" class="form-control"/>
+			                                <span asp-validation-for="@address.State" class="text-danger"></span>  
+			                                
+
+		                                </div>
+	                                </div>
+	                                <div class="row my-1">
+		                                <div class="col-3">Zip Code</div>
+		                                <div class="col-9">
+			                                <input asp-for="@address.ZipCode" type="text" class="form-control"/>
+			                                <span asp-validation-for="@address.ZipCode" class="text-danger"></span>  
+			                                
+		                                </div>
+	                                </div>
+	                                <div class="row my-1">
+		                                <div class="col-3">Country</div>
+		                                <div class="col-9">
+			                                <input asp-for="@address.Country" type="text" class="form-control"/>
+			                                <span asp-validation-for="@address.Country" class="text-danger"></span>  
+			                                
+		                                </div>
+	                                </div>
+	                               <a asp-action="Edit"  asp-controller="AddressUser" asp-route-id="@address.Id" type="submit" class="btn btn-primary" data-toggle="tooltip">Update Address</a>
+                                    
+                                }
+								 <br/>
+								 <br/>
+								  <h5 class="d-flex justify-content-between align-items-center mb-3"><span class="text-primary">MyOrders</span></h5>
+								 <table class="table table-bordered table-dark table-hover ">
+                                                     <thead>
+                                                     <tr>
+	                                                     <th>OrderDate</th>
+	                                                     <th>Status</th>
+                                                         <th>TotalPrice</th>
+	                                                     <th>Details</th>
+	                                                     <th>Ratings</th>
+                                                     </tr>
+                                 
+                                                    @foreach (OrderShopping order in ViewBag.order)
+                                                                                     									{
+                                                         <tbody >
+                                                         <tr class="table table-secondary">
+                                                             <td>@order.OrderDate</td>
+	                                                         <td>@order.OrderStatus</td>
+                                                             <td>@order.TotalPrice</td>
+	                                                         <td><a asp-action="OrderDetails" asp-route-id="@order.Id" class="view"  data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a></td>
+	                                                         <td><a asp-action="RatingCompany" asp-route-id="@order.Id" class="view"  data-toggle="tooltip"><i class="bi bi-star"></i></a></td>
+                                                         </tr>
+                                                         </tbody>
+                                                     }
+                                                 </table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</form>

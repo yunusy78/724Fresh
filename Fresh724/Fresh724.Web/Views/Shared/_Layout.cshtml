@@ -1,0 +1,141 @@
+﻿@using Fresh724.Service
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - Fresh724.Web</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/blog.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+     <link rel="stylesheet" href="~/css/navigationbar.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/about.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/assignment_4.styles.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="build/css/intlTelInput.css">
+    <link rel="stylesheet" href="~/build/css/intlTelInput.css">
+
+    
+
+    
+    
+</head>
+<body>
+<header>
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-info border-bottom box-shadow mb-3">
+          <div class="container-fluid">
+              <ul class="navbar-nav flex-grow-1">
+                  <li class="nav-item">
+                      <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Fresh724.Web</a>
+                  </li>
+              </ul>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                      aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                  <ul class="navbar-nav flex-grow-1">
+                      <li class="nav-item">
+                          <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" asp-area="" asp-controller="Contact" asp-action="CompanyAdd">Register Your Company</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link">Help</a>
+                      </li>
+
+
+                  </ul>
+                      
+                      <ul class="navbar-nav flex-grow-1">
+  
+  
+                      @if (User.IsInRole(RoleService.Role_Admin))
+                      {
+  
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Content Managment</a>
+                              <div class="dropdown-menu">
+                                   <a class="dropdown-item" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                                  <div class="dropdown-divider"></div>
+                              </div>
+                          </li>
+                      }
+  
+                      @if (User.IsInRole(RoleService.Role_User_Comp) || User.IsInRole(RoleService.Role_User_Empl) )
+                      {
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Content Managment</a>
+                              <div class="dropdown-menu">
+                                   <a class="dropdown-item" asp-area="Company" asp-controller="CompanyDashboard" asp-action="Index">Dashboard</a>
+                              </div>
+                          </li>
+                      }
+                      @using (Html.BeginForm())
+                      {
+                          <div class="input-group">
+                              <form class="nav-link text-light" role="search">
+                                  <input class="form-control me-2" type="search" placeholder="Search&hellip;" name="SearchString" aria-label="Search" value="@ViewData["CurrentFilter"]">
+                                  <input class="btn btn-outline-light" asp-area="" asp-controller="Home" asp-action="Index"  value="Search" type="submit"/>
+                                  <a><i ></i><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                              </form>
+  
+                          </div>
+                      }
+  
+                      <li class="nav-item">
+                          <a class="nav-link text-light" asp-area="" asp-controller="Cart" asp-action="Index">@await Component.InvokeAsync("Cart")</a>
+                      </li>
+                       <li class="nav-item">
+                           <a class="nav-link text-light" asp-area="" asp-controller="MyAccount" asp-action="Index">MyAccount</a>
+                           </li>
+  
+  
+                  </ul>
+                  <partial name="_LoginPartial"/>
+              </div>
+          </div>
+      </nav>
+</header>
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="footer">
+   
+    <div class="container" id="Footer">
+        <a asp-area="" asp-controller="Home" asp-action="About">About</a>
+        <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <a asp-area="" asp-controller="Home" asp-action="">Contact Us</a>
+    </div>
+    <div class="container" style="color:white"> 2022 - Fresh724.Web -</div>
+</footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/18f4e4f938.js" crossorigin="anonymous"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/js/about.js" asp-append-version="true"></script>
+<script src="~/js/dropdown.js" asp-append-version="true"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="build/js/intlTelInput-jquery.min.js"></script> 
+<script type="text/javascript" src="~/v2.3.2/jquery.rateyo.js"></script>
+<script src="~/build/js/intlTelInput.min.js"></script>
+<script src="~/build/js/intlTelInput-jquery.min.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

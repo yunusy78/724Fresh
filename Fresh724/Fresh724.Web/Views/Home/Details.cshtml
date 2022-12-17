@@ -1,0 +1,90 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Fresh724.Entity.Entities
+@model Fresh724.Entity.Entities.Cart
+<link href="~/v2.3.2/jquery.rateyo.css" rel="stylesheet"/>
+<script src="~/v2.3.2/jquery.rateyo.js"></script>
+<script src="~/v2.3.2/jquery.min.js"></script>
+<form method="post">
+    <input hidden asp-for="ProductId" />
+    <div class="card container pt-4" style="width:50%">
+    <div class="card-header bg-secondary text-light ml-0">
+        <div class=" row container" >
+            <div class="col-6">
+                <i class="fa fa-shopping-cart"></i> &nbsp;
+                Product Details
+            </div>
+            <div class="col-6 text-end">
+                <a asp-action="Index" class="btn btn-outline-info btn-sm">Back to Home</a>
+            </div>
+        </div>
+    </div>
+     </div>
+    <div class="card  container pt-4" style="width:50%">
+        
+        <div class="card-header bg-primary text-light ml-0  row ">
+
+            <div class="col-12 col-md-6">
+                <h1 class="text-white-50">@Model.Product.Title</h1>
+                <p class="text-warning">by @Model.Product.CreatedBy</p><p class="col-md-6" id="rating"></p>
+                @foreach (Company company in ViewBag.Companies)
+
+                 {
+
+                     <script>
+                                                                 
+                                                   /* Javascript */
+                                                    
+                                                   $(function () {
+                                                    
+                                                     $("#rating").rateYo({
+                                                    
+                                                       rating    : @company.TotalRating,
+                                                       readonly : true,
+                                                       multiColor: {
+                                                    
+                                                         "startColor": "#FF0000", //RED
+                                                         "endColor"  : "#00FF00"  //GREEN
+                                                       },
+                                                     
+                                                     });
+                                                    
+                                                   });
+                                                   </script>
+                 }
+</div>
+                     <div class="col-12 col-md-6 text-end pt-4">
+                <span class="badge bg-warning pt-2" style="height:30px;">@Model.Product.Category.Name</span>
+                <span class="badge bg-success pt-2" style="height:30px;">@Model.Product.Status</span>
+            </div>
+        </div>
+
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-12 col-lg-3 offset-lg-1 text-center">
+                    <img src="@Model.Product.ImageUrl" width="200%" class="rounded"/>
+                </div>
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <h5 class="mb-0">@Model.Product.Description</h5>
+                        <h5 class="text-dark mb-0">Kr @Model.Product.PurchasePrice</h5>
+                    </div>
+                    <div class="row pl-2">
+                        <div class="col-2 text-primary"><h4>Count</h4></div>
+                        <div class="input-group mb-2"><input type="number" name="Quantity" value="1" min="1" max="@Model.Product.Quantity" asp-for="Quantity" class="form-control">
+                            <div class="input-group-append">
+                                <button type="submit" value="Add to Cart" class="btn btn-primary form-control" style="height:50px;">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mb-2">
+                    <p class="text-muted mb-0">Available:@Model.Product.Quantity <span class="fw-bold"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+     
+</form>
+

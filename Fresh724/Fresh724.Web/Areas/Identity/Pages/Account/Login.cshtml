@@ -1,0 +1,100 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <form id="account" method="post">
+
+
+                    
+                    <!-- Email input -->
+                    <h1>User Login</h1>
+                    <div class="form-outline mb-4">
+                        <input asp-for="Input.Email" class="form-control form-control-lg">
+                        <label asp-for="Input.Email" class="form-label">Email address</label>
+                    </div>
+                         
+                         
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input asp-for="Input.Password" class="form-control form-control-lg">
+                        <label asp-for="Input.Password" class="form-label">Password</label>
+                    </div>
+                     
+                     
+                    <div class="d-flex justify-content-around align-items-center mb-4">
+                        <!-- Checkbox -->
+                        <div class="form-check">
+                            <label asp-for="Input.RememberMe" class="form-label">
+                                <input class="form-check-input" asp-for="Input.RememberMe"/>
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                        <p>
+                            <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        </p>
+                    </div>
+                     
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+                     
+
+                    <div>
+                             
+                        <p>
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        </p>
+                    </div>
+                     
+                    <div class="divider d-flex align-items-center my-4">
+                        <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+                    </div>
+                </form>
+                 @{
+                                                             if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                                                             {
+                                                                 <div>
+                                                                     <p>
+                                                                         There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                                                                         about setting up this ASP.NET application to support logging in via external services</a>.
+                                                                     </p>
+                                                                 </div>
+                                                             }
+                                                             else
+                                                             {
+                                                                 <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                                                     <div>
+                                                                         <p>
+                                                                             @foreach (var provider in Model.ExternalLogins)
+                                                                             {
+                                                                                 if (@provider.DisplayName == "Facebook")
+                                                                                 {
+                                                                                     <button type="submit" class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><i class="fab fa-facebook-f me-2"></i>@provider.DisplayName</button> 
+                                                                                 }
+                                                                                 if (@provider.DisplayName == "Google")
+                                                                                 {
+                                                                                     <button type="submit" class="btn btn-primary btn-lg btn-block" style="background-color: #b02a37 " name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><i class="fab fa-google me-2"></i>@provider.DisplayName</button> 
+                                                                                 }
+                                                                                 
+                                                                             }
+                                                                         </p>
+                                                                     </div>
+                                                                 </form>
+                                                             }
+                                                         }
+            </div>
+        </div>
+    </div>
+    
+        </section>
+
+           
+   
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

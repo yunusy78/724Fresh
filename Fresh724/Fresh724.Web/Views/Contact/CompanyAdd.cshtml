@@ -1,0 +1,68 @@
+@model Fresh724.Entity.Entities.CompanyApply
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+
+<form method="Post" asp-action="CompanyAdd" enctype="multipart/form-data">
+  <input asp-for="Id" hidden />
+   <div class="card text-black" style="border-radius: 70px;">
+              <div class="card-body p-md-5">
+                <div class="row justify-content-center">
+                  <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                    <h4 class="card-title mt-3 text-center">Create Account</h4>
+                    <p class="text-center">Get started with your Company</p>
+
+                    <p id="CompanyRegister" class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"></p>
+
+                    <form class="mx-1 mx-md-4">
+
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-briefcase fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input asp-for="CompanyName" type="text" id="form3Example1c" class="form-control" placeholder="Business name"/>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input asp-for="CompanyEmail" type="email" id="form3Example3c" placeholder="Email address" class="form-control"/>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
+
+                        <div class="form-outline flex-fill mb-0">
+                          <input asp-for="CompanyPhone" type="tel" placeholder="Phone Number" id="Phone" class="form-control"/>
+                        </div>
+                      </div>
+
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-city fa-lg me-3 fa-fw"></i>
+
+                        <div class="form-outline flex-fill mb-0">
+                          <input asp-for="CompanyState" type="text" id="form3Example4cd" placeholder="Company State" class="form-control"/>
+
+                        </div>
+                      </div>
+
+                      <div class="form-check d-flex justify-content-center mb-5">
+                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c"/>
+                        <label class="form-check-label" for="form2Example3">
+                          I agree all statements in <a href="#!">Terms of Fresh724</a>
+                        </label>
+                      </div>
+
+                      <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                      </div>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+</form>
