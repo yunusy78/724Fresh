@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="Dashboard" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a asp-area="Company" asp-controller="CompanyDashboard" asp-action="Index" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Content Managment</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -210,7 +210,7 @@
                             <i class="fa fa-chart-pie fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Total Income</p>
-                                <h6 class="mb-0">@ViewBag.totalIncome</h6>
+                                <h6 class="mb-0">Kr @ViewBag.totalIncome</h6>
                             </div>
                         </div>
                     </div>
@@ -230,6 +230,7 @@
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h6 class="mb-0">Products</h6>
                     <a href="">Show All</a>
+                    <a asp-area="Company" asp-controller="Product" asp-action="AddOrEdit" class="btn btn-primary" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
                 </div>
                 <div class="table-responsive">
                     <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -244,16 +245,13 @@
                                    <th scope="col">Price</th>
                                    <th scope="col">Status</th>
                                    <th scope="col">Action</th> 
+                                   <th scope="col">Action</th> 
                         </tr>
                         </thead>
                         <tbody>
                             
                         <div class="container-fluid pt-4 px-4">
                             <div class="bg-secondary text-center rounded p-4">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <h6 class="mb-0">Our Products</h6>
-                                    <a href="">Show All</a>
-                                </div>
                                 @foreach (var item in ViewBag.Products)
                                 {
                                     <tr>
@@ -265,6 +263,7 @@
                                         <td>@item.Description</td>
                                         <td>@item.PurchasePrice</td>
                                         <td>@item.Status</td>
+                                        <td><a asp-area="Company" asp-controller="Product" asp-action="AddOrEdit" asp-route-id="@item.Id" class="btn btn-warning" data-toggle="modal"><span>Edit</span></a>
                                         <td><a class="btn btn-sm btn-primary" asp-route-id="@item.Id" asp-area="Company" asp-controller="Product" asp-action="Details">Detail</a> </td>
                                         </tr>
                                 }
@@ -281,6 +280,7 @@
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h6 class="mb-0">Employees</h6>
                     <a href="">Show All</a>
+                    <a asp-area="Company" asp-controller="Employee" asp-action="Add" class="btn btn-primary" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
                 </div>
                 <div class="table-responsive">
                     <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -295,16 +295,13 @@
                             <th scope="col">Email</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
+                            <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                                     
                         <div class="container-fluid pt-4 px-4">
                             <div class="bg-secondary text-center rounded p-4">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <h6 class="mb-0">Our Companies</h6>
-                                    <a href="">Show All</a>
-                                </div>
                                 @foreach (var item in ViewBag.Employees)
                                 {
                                     <tr>
@@ -316,6 +313,7 @@
                                         <td>@item.LastName</td>
                                         <td>@item.Email</td>
                                         <td>@item.Status</td>
+                                        <td><a asp-area="Company" asp-controller="Employee" asp-action="Add" asp-route-id="@item.Id" class="btn btn-warning" data-toggle="modal"><span>Edit</span></a>
                                         <td><a class="btn btn-sm btn-primary" asp-route-id="@item.Id" asp-area="Company" asp-controller="Employee" asp-action="Details">Detail</a> </td>
                                     </tr>
                                 }
@@ -347,16 +345,14 @@
                                            <th scope="col">TotalPrice</th>
                                            <th scope="col">OrderStatus</th>
                                            <th scope="col">Action</th> 
+                                    
+                                    
                                 </tr>
                                 </thead>
                                 <tbody>
                                     
                                 <div class="container-fluid pt-4 px-4">
                                     <div class="bg-secondary text-center rounded p-4">
-                                        <div class="d-flex align-items-center justify-content-between mb-4">
-                                            <h6 class="mb-0">Our Products</h6>
-                                            <a href="">Show All</a>
-                                        </div>
                                         @foreach (var item in ViewBag.Orders)
                                         {
                                             <tr>

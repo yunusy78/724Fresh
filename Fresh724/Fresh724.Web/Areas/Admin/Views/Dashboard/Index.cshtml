@@ -108,7 +108,8 @@
                     <i class="fa fa-bars"></i>
                 </a>
                 <form class="d-none d-md-flex ms-4">
-                    <input class="form-control bg-dark border-0" type="search" placeholder="Search">
+                    <input class="form-control bg-dark border-0" type="search" placeholder="Search" name="SearchString" aria-label="Search" value="@ViewData["CurrentFilter"]">
+                    <input class="btn btn-primary btn-group-sm" asp-area="Company" asp-controller="Product" asp-action="Index" value="Search" type="submit"/>
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
@@ -215,7 +216,7 @@
                             <i class="fa fa-chart-pie fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Total Income</p>
-                                <h6 class="mb-0">@ViewBag.totalIncome</h6>
+                                <h6 class="mb-0">Kr @ViewBag.totalIncome</h6>
                             </div>
                         </div>
                     </div>
@@ -246,6 +247,7 @@
                             <th scope="col">CategoryName</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
+                            <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -254,7 +256,7 @@
                             <div class="bg-secondary text-center rounded p-4">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <h6 class="mb-0">Our Categories</h6>
-                                    <a href="">Show All</a>
+                                     <a asp-area="Admin" asp-controller="Category" asp-action="Add" class="btn btn-primary" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Category</span></a>
                                 </div>
                                 @foreach (var item in ViewBag.Category)
                                 {
@@ -264,6 +266,7 @@
                                         <td>@item.Id</td>
                                         <td>@item.Name</td>
                                         <td>@item.Status</td>
+                                         <td><a class="btn btn-sm btn-warning" asp-area="Admin" asp-controller="Category" asp-action="Edit">Edit</a> </td>
                                         <td><a class="btn btn-sm btn-primary" asp-route-id="@item.Id" asp-area="Admin" asp-controller="Category" asp-action="Details">Detail</a> </td>
                                     </tr>
                                 }
@@ -292,6 +295,7 @@
                                             <th scope="col">TotalRating</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Action</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -301,6 +305,7 @@
                                                     <div class="d-flex align-items-center justify-content-between mb-4">
                                                         <h6 class="mb-0">Our Companies</h6>
                                                         <a href="">Show All</a>
+                                                         <a asp-area="Admin" asp-controller="Company" asp-action="Add" class="btn btn-primary" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Company</span></a>
                                                     </div>
                                                     @foreach (var item in ViewBag.company)
                                                     {
@@ -311,6 +316,7 @@
                                                             <td>@item.Name</td>
                                                             <td>@item.TotalRating</td>
                                                             <td>@item.Status</td>
+                                                            <td><a class="btn btn-sm btn-warning" asp-area="Admin" asp-controller="Company" asp-action="Edit">Edit</a> </td>
                                                             <td><a class="btn btn-sm btn-primary" asp-route-id="@item.Id" asp-area="Admin" asp-controller="Company" asp-action="Details">Detail</a> </td>
                                                         </tr>
                                                     }

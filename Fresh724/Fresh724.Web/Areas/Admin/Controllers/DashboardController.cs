@@ -58,7 +58,7 @@ public class DashboardController : Controller
             todayTotalPrice += i.TotalPrice;
         }
         ViewBag.TodayTotalPrice = todayTotalPrice;
-        ViewBag.totalIncome = yearTotalPrice*0.2;
+        ViewBag.totalIncome = Convert.ToInt32(yearTotalPrice*0.2);
         ViewBag.mountTotalPrice = mountTotalPrice;
         ViewBag.yearTotalPrice = yearTotalPrice;
         return View();

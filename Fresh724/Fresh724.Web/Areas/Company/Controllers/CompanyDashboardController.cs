@@ -65,9 +65,11 @@ public class CompanyDashboardController : Controller
                     
             }
         }
+
+        
         ViewBag.Orders = objList;
         
-        
+       
         double todayTotalPrice=0;
         double mountTotalPrice=0;
         double yearTotalPrice=0;
@@ -92,7 +94,7 @@ public class CompanyDashboardController : Controller
             todayTotalPrice += i.TotalPrice;
         }
         ViewBag.TodayTotalPrice = todayTotalPrice;
-        ViewBag.totalIncome = yearTotalPrice*0.8;
+        ViewBag.totalIncome = Convert.ToInt32(yearTotalPrice*0.8);
         ViewBag.mountTotalPrice = mountTotalPrice;
         ViewBag.yearTotalPrice = yearTotalPrice;
         return View();
